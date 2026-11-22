@@ -1,0 +1,1 @@
+Deploy the updated CampusVoting.sol, then paste its new address into frontend/app.js.\n

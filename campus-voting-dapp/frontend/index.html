@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Voting dApp</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.5/ethers.umd.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-area">
+      <h1>Campus Voting dApp</h1>
+      <button id="connectButton" class="primary">Connect MetaMask</button>
+    </div>
+    <div class="wallet-area">
+      <span id="walletStatus">Wallet not connected</span>
+    </div>
+  </header>
+
+  <nav class="navbar" aria-label="Main navigation">
+    <a href="#registration">Voter Registration / Login</a>
+    <a href="#election">Candidates / Vote / Results</a>
+    <a href="#adminPanel">Electoral Admin</a>
+  </nav>
+
+  <main>
+    <div id="message" class="notice" role="status" aria-live="polite">Connect MetaMask to begin.</div>
+
+    <section class="panel" id="registration">
+      <h2>Voter Registration and Login</h2>
+      <p class="muted">Connect MetaMask first. The wallet still needs approval from the electoral admin before it can vote.</p>
+      <label for="voterFullName">Full name</label>
+      <input id="voterFullName" type="text" autocomplete="name">
+      <p class="field-note">Full name and Student ID are display fields in this prototype; on-chain registration records the connected wallet address.</p>
+      <label for="voterStudentId">Student ID</label>
+      <input id="voterStudentId" type="text" autocomplete="off">
+      <button id="registerButton" class="primary">Register this wallet</button>
+      <h3>Login</h3>
+      <p class="muted">Connect the MetaMask wallet you are registered with.</p>
+      <button id="checkLoginButton" class="primary">Check Login</button>
+      <div id="loginStatus" class="status-box">Not logged in.</div>
+      <p id="voterState" class="small-status">Registration status: —</p>
+      <p id="voteState" class="small-status">Vote status: —</p>
+    </section>
+
+    <section class="panel" id="election">
+      <div class="section-heading">
+        <div><h2>Candidates, Voting and Results</h2><p class="muted">View candidates, cast your vote while the election is open, and check the tabulated results.</p></div>
+        <div class="election-pill">Election: <strong id="electionStatus">Not loaded</strong></div>
+      </div>
+      <div class="results-summary"><span id="totalVotes">Total votes: 0</span><button id="refreshButton" class="secondary">Refresh results</button></div>
+      <div id="candidateList" class="candidate-grid">Connect your wallet to load candidates.</div>
+    </section>
+
+    <section class="panel" id="adminPanel" hidden>
+      <h2>Electoral Admin</h2>
+      <p class="muted">Admin controls are available only to the wallet that deployed the contract.</p>
+      <h3>Add Candidate</h3>
+      <label for="candidateName">Candidate name</label><input id="candidateName" placeholder="e.g. Juan Dela Cruz">
+      <label for="candidatePosition">Position</label><input id="candidatePosition" placeholder="e.g. Student Council President">
+      <button id="addCandidateButton" class="primary">Add Candidate</button>
+      <h3>Authorize Registered Voter</h3>
+      <label for="voterAddress">Voter wallet address</label><input id="voterAddress" placeholder="0x...">
+      <button id="authorizeVoterButton" class="primary">Authorize Voter</button>
+      <h3>Election Controls</h3>
+      <button id="startElectionButton" class="primary">Start Election</button>
+      <button id="endElectionButton" class="danger">Close Election</button>
+    </section>
+    <p class="footer-note">Campus Voting dApp · Educational prototype · Sepolia testnet</p>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
